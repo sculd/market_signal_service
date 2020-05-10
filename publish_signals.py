@@ -29,5 +29,5 @@ def run_loop(subscription_id):
 
 
 if __name__ == '__main__':
-    subscription_id = os.getenv('CRYPTOWATCH_PUBSUB_SUBSCRIPTION_ID')
+    subscription_id = os.getenv('CRYPTOWATCH_PUBSUB_SIGNAL_SUBSCRIPTION_ID')
     run_loop(subscription_id)
