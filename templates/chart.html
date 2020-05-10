@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+    <title>Chart For {{ symbol }}</title>
+  </head>
+  <body>
+    <!-- TradingView Widget BEGIN -->
+    <div class="tradingview-widget-container">
+      <div id="tradingview_91be2"></div>
+      <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/{{ symbol }}/" rel="noopener" target="_blank"><span class="blue-text">{{ symbol }} Chart</span></a> by TradingView</div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js">
+      {
+      "symbol": "{{ symbol }}",
+      "width": 980,
+      "height": 610,
+      "locale": "en",
+      "dateRange": "1d",
+      "colorTheme": "light",
+      "trendLineColor": "#37a6ef",
+      "underLineColor": "#E3F2FD",
+      "isTransparent": false,
+      "autosize": false,
+      "largeChartUrl": ""
+    }
+      </script>
+    </div>
+
+    <div class="tradingview-widget-container">
+      <script type="text/javascript" async>
+      new TradingView.widget(
+      {
+      "width": 980,
+      "height": 610,
+      "symbol": "{{ symbol }}",
+      "interval": "1",
+      "timezone": "Etc/UTC",
+      "theme": "light",
+      "style": "1",
+      "locale": "en",
+      "toolbar_bg": "#f1f3f6",
+      "enable_publishing": false,
+      "allow_symbol_change": true,
+      "container_id": "tradingview_91be2"
+    }
+      );
+      </script>
+    </div>
+    <!-- TradingView Widget END -->
+  </body>
+</html>
+
