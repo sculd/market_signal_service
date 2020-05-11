@@ -1,22 +1,15 @@
-import os
-from google.cloud import bigquery
+from tda import auth, client
+import json
 
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.path.join(os.getcwd(), 'credential.json')
+token_path = '/path/to/token.pickle'
+api_key = 'N3RLUXMOAU5FA16TYU1FXPEFTCSN8CQC'
+redirect_uri = 'http://localhost'
+try:
+    c = auth.client_from_token_file(token_path, api_key)
+except FileNotFoundError:
+    from selenium import webdriver
+    with webdriver.Chrome() as driver:
+        c = auth.client_from_login_flow(
+            driver, api_key, redirect_uri, token_path)
 
-client = bigquery.Client()
-query_job = client.query("""
-    SELECT
-      CONCAT(
-        'https://stackoverflow.com/questions/',
-        CAST(id as STRING)) as url,
-      view_count
-    FROM `alpaca-trading-239601.market_signal.market_signal`
-    LIMIT 10""")
-
-results = query_job.result()  # Waits for job to complete.
-
-
-
-
-for row in results:
-    print("{} : {} views".format(row.url, row.view_count))
+print(c)

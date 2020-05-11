@@ -25,10 +25,14 @@ def _print_with_severity_prefix(signal):
 def _log_print_signal(signal):
     _print_with_severity_prefix(signal)
     log_name = get_log_name()
-    if not log_name:
-        return
     logger = get_logger(log_name=log_name)
     logger.log_struct(signal)
 
 def log_signal(signal):
     _log_print_signal(signal)
+
+def list_entries():
+    log_name = get_log_name()
+    logger = get_logger(log_name=log_name)
+    return logger.list_entries()
+
