@@ -19,5 +19,9 @@ def publish(experiment_name, tag_dict, field_dict):
     for field_key, field_value in field_dict.items():
         p = p.field(field_key, float(field_value))
 
-    _write_api.write(bucket=_BUCKET, record=p)
+    try:
+        _write_api.write(bucket=_BUCKET, record=p)
+    except Exception as ex:
+        print('Exception while writing to influxdb')
+        print(ex)
 
