@@ -9,6 +9,7 @@ from flask_cors import CORS
 from collections import defaultdict
 import config
 import util.logging
+import signals.signals
 
 _EXCHANGES_FILENAME = 'exchanges.json'
 _MARKETS_FILENAME = 'markets.json'
@@ -66,13 +67,8 @@ def get_symbols():
 
 @app.route('/signals', methods=['GET'])
 def get_signals():
-    signals = {}
-    entries = list(util.logging.list_entries())
-    '''
-    for entry in entries:
-        print(entry.payload)
-    '''
-    return signals
+    ss = {'signals': signals.signals.get_signals()}
+    return ss
 
 @app.route("/chart")
 @flask_cors.cross_origin(origin='*')

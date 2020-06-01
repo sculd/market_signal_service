@@ -1,5 +1,5 @@
 import os, datetime
-from google.cloud import bigquery
+import util.bigquery
 
 _PUBLISH_QUERY_FORMAT = (
     """
@@ -7,15 +7,6 @@ _PUBLISH_QUERY_FORMAT = (
     VALUES{values}    
     """
     )
-
-_client = None
-
-
-def _get_client():
-    global _client
-    if not _client:
-        _client = bigquery.Client(project=os.getenv('GOOGLE_CLOUD_PROJECT'))
-    return _client
 
 
 def _get_values_strs(exchange, column_dicts):
@@ -43,7 +34,7 @@ def _get_values_strs(exchange, column_dicts):
 
 
 def publish(exchange, column_dicts):
-    _get_client().query(
+    util.bigquery.get_client().query(
         _PUBLISH_QUERY_FORMAT.format(
             values = _get_values_strs(exchange, column_dicts)
             )
