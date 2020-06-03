@@ -72,12 +72,15 @@ def get_signals():
 
 @app.route("/chart")
 @flask_cors.cross_origin(origin='*')
-def home():
+def chart():
     symbol = request.args.get('symbol')
     if not symbol:
         return 'invalid request'
     return render_template("chart.html", symbol=symbol.upper())
 
+@app.route('/', methods=['GET'])
+def home():
+    return render_template("index.html")
 
 if __name__ == '__main__':
     # Used when running locally only. When deploying to Cloud Run,
